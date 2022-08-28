@@ -1,7 +1,6 @@
 from doctest import master
 from logging import shutdown
 from multiprocessing.pool import ApplyResult
-import subprocess
 from tkinter import*
 import tkinter
 from turtle import width
@@ -24,7 +23,7 @@ def gui():
 
     app = customtkinter.CTk()  
     app.geometry("1000x500")
-    app.title("Ower UI 1.0 :D")
+    app.title("Ower OS v1.0")
 
     title = customtkinter.CTkLabel(master=app,text="Ower OS 1.0",bg="darkblue")
     title.config(font=("Courier", 30))
@@ -38,22 +37,20 @@ def gui():
             webbrowser.open("https://google.com")
             browserList.destroy()
         def customSiteButton():
-            print("Enter URL in TERMINAL")
+            print("Please enter a URL (Type in cancel to cancel the process)")
             get_url = input("")
-            webbrowser.open(get_url)
-            browserList.destroy()
-            #under here is an unfinish code
-            #SiteOpening = customtkinter.CTk()
-            #SiteOpening.title("Open Site")
-            #SiteOpening.geometry("350x120")
-            #def GetUrl():
-                #textBox = textBox.get("1.0",customtkinter.END)
-                #webbrowser.open(textBox)
-            #textBox = customtkinter.CTkEntry(master=SiteOpening,width=500,height=30)
-            #textBox.pack(pady=35) 
-            #openButton = customtkinter.CTkButton(master=SiteOpening,text="Open",command=GetUrl)
-            #openButton.place(relx=0.5,rely=0.88,anchor=tkinter.CENTER)
-            #SiteOpening.mainloop()
+            if get_url == "cancel":
+                print("Canceled")
+                browserList.destroy()
+            else:    
+                print("Redirecting to default browser (2s)...")
+                time.sleep(1)
+                print("Redirecting to default browser (1s)...")
+                time.sleep(1)
+                webbrowser.open(get_url)
+                time.sleep(5)
+                customSiteButton()
+                browserList.destroy()
         def gmailButton():
             webbrowser.open("https://gmail.com")
             browserList.destroy()
@@ -102,7 +99,7 @@ def gui():
             customtkinter.set_appearance_mode("Dark")
         settingsWindow = customtkinter.CTk()
         settingsWindow.title("Settings")
-        settingsWindow.geometry("750x650")
+        settingsWindow.geometry("650x500")
         settingsText = customtkinter.CTkLabel(master=settingsWindow,text="Settings")
         settingsText.pack()
         settingsText.config(font=("Courier",30))
@@ -112,8 +109,31 @@ def gui():
         themeSwitchLight = customtkinter.CTkButton(master=settingsWindow,text="          Light Theme         ",width=50,height=30,command=switchThemeLight)
         themeSwitchLight.place(relx=0.5,rely=0.2,anchor=tkinter.CENTER)
         themeSwitchDark = customtkinter.CTkButton(master=settingsWindow,text="           Dark Theme         ",width=50,height=30,command=switchThemeDark)
-        themeSwitchDark.place(relx=0.5,rely=0.26,anchor=tkinter.CENTER)
+        themeSwitchDark.place(relx=0.5,rely=0.3,anchor=tkinter.CENTER)
         settingsWindow.mainloop()
+    def aboutButton():
+        aboutSection = customtkinter.CTk()
+        aboutSection.title("About")
+        aboutSection.geometry("500x450")
+        about_text = customtkinter.CTkLabel(master=aboutSection,text="About And Credits")
+        about_text.pack()
+        text = customtkinter.CTkLabel(master=aboutSection,text="Ower OS Version 1.0")
+        text.pack(pady=10)
+        copyrightBruh2 = customtkinter.CTkLabel(master=aboutSection,text="Ower OS © ,Neonoen")
+        copyrightBruh2.pack()
+        creditsNote = customtkinter.CTkLabel(master=aboutSection,text="Credits")
+        creditsNote.pack()
+        credits1 = customtkinter.CTkLabel(master=aboutSection,text="The Offical Python Discord for")
+        credits1.pack()
+        credits2 = customtkinter.CTkLabel(master=aboutSection,text="Bug Fixes Ideas")
+        credits2.pack()
+        credits3  = customtkinter.CTkLabel(master=aboutSection,text="Testing and Helping")
+        credits3.pack()
+        credits4 = customtkinter.CTkLabel(master=aboutSection,text="The Github Website")
+        credits4.pack()
+        credits5 = customtkinter.CTkLabel(master=aboutSection,text="Publishing and Making Testing possible")
+        credits5.pack()
+        aboutSection.mainloop()
     def shutdownButton():
         shutdownConfirmWindow = customtkinter.CTk()
         shutdownConfirmWindow.geometry("650x250")
@@ -144,6 +164,9 @@ def gui():
 
     settings = customtkinter.CTkButton(master=app, text="       Settings      ",width=40,height=40, command=settingsButton)
     settings.place(relx=0.9,rely=0.8,anchor=tkinter.CENTER)
+
+    about = customtkinter.CTkButton(master=app, text="       About and Credits      ",width=40,height=40, command=aboutButton)
+    about.place(relx=0.9,rely=0.7,anchor=tkinter.CENTER)
     
     ShutDown = customtkinter.CTkButton(master=app, text="       Shutdown      ",width=40,height=40, command=shutdownButton) 
     ShutDown.place(relx=0.095,rely=0.4,anchor=tkinter.CENTER)
